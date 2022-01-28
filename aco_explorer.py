@@ -70,7 +70,8 @@ def disassemble_foz(infile: str) -> str:
     if ret != 0:
         return None
     files = os.listdir(out_dir)
-    assert len(files) == 1, "To many disasm files."
+    if len(files) != 1:
+        return None
     file = os.path.join(out_dir, files[0])
     with open(file, "r") as f:
         output = f.read()
