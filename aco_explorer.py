@@ -28,7 +28,7 @@ import subprocess
 @dataclasses.dataclass
 class EnvInfo:
     glslang: str = "glslangValidator"
-    fossilize: str = ""
+    fossilize_path: str = ""
     inotifywait: str = "inotifywait"
     spv_file: str = "/tmp/aco_explorer{}.spv".format(os.getpid())
     foz_file: str = "/tmp/aco_explorer{}.foz".format(os.getpid())
@@ -38,11 +38,11 @@ class EnvInfo:
 
     @property
     def fossilize_synth(self):
-        return os.path.join(self.fossilize, "fossilize-synth")
+        return os.path.join(self.fossilize_path, "fossilize-synth")
 
     @property
     def fossilize_disasm(self):
-        return os.path.join(self.fossilize, "fossilize-disasm")
+        return os.path.join(self.fossilize_path, "fossilize-disasm")
 
 def get_env_info() -> EnvInfo:
     e = EnvInfo()
