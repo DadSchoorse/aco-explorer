@@ -59,7 +59,7 @@ def inotifywait(file: str) -> bool:
     return subprocess.run([ENVIRONMENT.inotifywait, "-e", "modify", file], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
 
 def compile_shader(infile: str, outfile: str) -> bool:
-    return subprocess.run([ENVIRONMENT.glslang, "-V", "-S", "comp", "--quiet", infile, "-o", outfile]).returncode == 0
+    return subprocess.run([ENVIRONMENT.glslang, "-V", "--target-env", "vulkan1.2", "-S", "comp", "--quiet", infile, "-o", outfile]).returncode == 0
 
 def create_foz(infile: str, outfile: str) -> bool:
     return subprocess.run([ENVIRONMENT.fossilize_synth, "--comp", infile, "--output", outfile], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
