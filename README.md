@@ -35,4 +35,4 @@ options:
 | :--------------------------------- | :----------- |
 | `FOSSILIZE_PATH`                        | Prefix for the Fossilize cli commands, e.g. a local Fossilize build |
 | `RADV_PATH`                        | RADV icd json file, default is `/usr/share/vulkan/icd.d/radeon_icd.x86_64.json` |
-| `RADV_FAMILY`                      | AMD gpu generation that's used for the output, default is sienna_cichlid. See https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/amd/common/amd_family.c for a complete list. |
+| `RADV_FAMILY`                      | AMD gpu generation that's used for the output, default is navi21. See https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/amd/common/amd_family.c for a complete list. |
