@@ -35,4 +35,5 @@ options:
 | :--------------------------------- | :----------- |
 | `FOSSILIZE_PATH`                        | Prefix for the Fossilize cli commands, e.g. a local Fossilize build |
 | `RADV_PATH`                        | RADV icd json file, default is `/usr/share/vulkan/icd.d/radeon_icd.x86_64.json` |
+| `RADV_DRM_SHIM`                    | `libamdgpu_noop_drm_shim.so` path (build with `meson -Dtools=drm-shim`) |
 | `RADV_FAMILY`                      | AMD gpu generation that's used for the output, default is navi21. See https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/amd/common/amd_family.c for a complete list. |

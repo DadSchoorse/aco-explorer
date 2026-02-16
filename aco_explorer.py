@@ -34,6 +34,7 @@ class EnvInfo:
     foz_file: str = "/tmp/aco_explorer{}.foz".format(os.getpid())
     disasm_dir: str = "/tmp/aco_explorer{}_dis".format(os.getpid())
     radv_path: str = "/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
+    radv_drm_shim = "/path/to/libamdgpu_noop_drm_shim.so"
     radv_family: str = "navi21"
 
     @property
@@ -66,8 +67,9 @@ def create_foz(infile: str, outfile: str) -> bool:
 
 def disassemble_foz(infile: str) -> str:
     out_dir = ENVIRONMENT.disasm_dir
-    ret = subprocess.run([ENVIRONMENT.fossilize_disasm, infile, "--output", out_dir, "--target", "isa"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode
-    if ret != 0:
+    result = subprocess.run([ENVIRONMENT.fossilize_disasm, infile, "--output", out_dir, "--target", "isa"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
+    if result.returncode != 0:
+        print(result.stderr.decode('utf-8'))
         return None
     files = os.listdir(out_dir)
     if len(files) != 1:
@@ -126,7 +128,8 @@ def main():
     print(ENVIRONMENT)
 
     os.environ["VK_ICD_FILENAMES"] = ENVIRONMENT.radv_path
-    os.environ["RADV_FORCE_FAMILY"] = ENVIRONMENT.radv_family
+    os.environ["AMDGPU_GPU_ID"] = ENVIRONMENT.radv_family
+    os.environ["LD_PRELOAD"] = ENVIRONMENT.radv_drm_shim
 
     pathlib.Path(ENVIRONMENT.spv_file).touch()
     pathlib.Path(ENVIRONMENT.foz_file).touch()
