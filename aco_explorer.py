@@ -34,7 +34,7 @@ class EnvInfo:
     foz_file: str = "/tmp/aco_explorer{}.foz".format(os.getpid())
     disasm_dir: str = "/tmp/aco_explorer{}_dis".format(os.getpid())
     radv_path: str = "/usr/share/vulkan/icd.d/radeon_icd.x86_64.json"
-    radv_drm_shim = "/path/to/libamdgpu_noop_drm_shim.so"
+    radv_drm_shim: str = "/path/to/libamdgpu_noop_drm_shim.so"
     radv_family: str = "navi21"
 
     @property
